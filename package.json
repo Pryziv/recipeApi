@@ -1,0 +1,24 @@
+{
+  "name": "recipe_server.js",
+  "version": "1.0.0",
+  "description": "a simple static server built with express.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pryziv/recipeApi.git"
+  },
+  "author": "Cameron McCarthy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pryziv/recipeApi/issues"
+  },
+  "homepage": "https://github.com/Pryziv/recipeApi#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  }
+}
