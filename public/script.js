@@ -15,11 +15,8 @@ function getRecipe() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
-              console.log("trying to respond");
               var response = JSON.parse(xhr.responseText)
-              console.log("responding");
               ingredientDiv.innerHTML = `<h><center>Search Results for ${ingredientName} </h>`;
-              console.log("still responding");
               var count = response.count;
               for(var i=0; i<count; i++){
  			        ingredientDiv.innerHTML = ingredientDiv.innerHTML +
@@ -31,7 +28,7 @@ function getRecipe() {
                   }
         }
     }
-    xhr.open('GET', `/recipe?ingredient=${ingredientName}`, true)
+    xhr.open('POST', `/recipe?ingredient=${ingredientName}`, true)
     xhr.send()
 }
 

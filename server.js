@@ -46,7 +46,8 @@ app.get('/weather', (request, response) => {
 
 app.get('/recipe', (request, response) => {
   let ingredient = request.query.ingredient;
-  console.log("Query "+request.query);
+  console.log("GET Query");
+  console.log("ingredient "+request.query.ingredient);
   if(!ingredient){
     return response.json({message: 'Please enter a ingredient name'});
   }
@@ -55,7 +56,7 @@ app.get('/recipe', (request, response) => {
   requestModule.get(url, (err, res, data) => {
     dataObj = JSON.parse(data);
     var count = dataObj.count;
-    var htmlString = '<html><h1><center>Search Results for '+ingredient+'</h1><body>'
+    var htmlString = '<html><h1><center>Search Results for '+ingredient+'</h1><body>';
     for(var i=0; i<count; i++){
     htmlString = htmlString +
     `<h><center><b><a href=${dataObj.recipes[i].source_url} target="_blank">Recipe title ${dataObj.recipes[i].title}</a><b></h>
@@ -65,11 +66,24 @@ app.get('/recipe', (request, response) => {
           </ul>`
         }
     htmlString+='</body></html>'
-    if(ingredient != null){
-      return response.send(htmlString);
-    }else{
-    return response.contentType('application/json').json(JSON.parse(data));
+    //if(ingredient != null){
+    return response.send(htmlString);
+    //}else{
+    //return response.contentType('application/json').json(htmlString);
+    //}
+  })
+})
+app.post('/recipe', (request, response) => {
+  let ingredient = request.query.ingredient;
+  console.log(" POST Query");
+  console.log("ingredient "+request.query.ingredient);
+  if(!ingredient){
+    return response.json({message: 'Please enter a ingredient name'});
   }
+  console.log('Accessing API');
+  const url = `http://www.food2fork.com/api/search?q=${ingredient}&key=${RECIPE_API_KEY}`;
+  requestModule.get(url, (err, res, data) => {
+    return response.contentType('application/json').json(JSON.parse(data));
   })
 })
 //start server
